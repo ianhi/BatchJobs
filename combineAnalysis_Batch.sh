@@ -4,7 +4,7 @@ cd /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/CMSSW_5_3_20/src/
 eval `scramv1 runtime -sh`
 cd /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/CMSSW_5_3_20/src/
 
-nFiles=40
+nFiles=4
 i=0
 while [ $i -lt $(($nFiles/4)) ];
 do
