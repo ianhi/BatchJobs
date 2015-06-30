@@ -31,6 +31,23 @@ if $PyquenWide;then
 fi
 if $JewelDijet;then
     echo "JewelDijet   $jobNumber"
-    cmsRun ../GeneratorInterface/JewelInterface/test/testJewelDijet.py output="JewelDijet_$jobNumber" maxEvents=$nEvents  &> Jewel_${jobNumber}_numEvents${nEvents}.log
+    cd ../GeneratorInterface/JewelInterface/test/
+    if [ -e params.dat ]; then #Checking if params.dat exists
+	lastModified="$(stat -c '%Z' params.dat)"
+	curTime="$(date +%s)"
+	sleepTime=40
+	if [ $curTime -lt $((${lastModified}+${sleepTime})) ];then #if it already exists then check if it was recently modified
+	    echo 'sleeping for ${sleepTime} seconds'
+	    sleep ${sleepTime}
+	    rm params.dat
+	fi
+    fi
+    sed s/OUTPUT/Ti_14_${jobNumber}_numEvents${nEvents}.hepmc/ params.template.dat > params.dat
+    sed s/OUTLOG/Ti14_${jobNumber}_numEvents${nEvents}.log/ params.dat -i
+ #   cd /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/CMSSW_5_3_20/src/outputs
+    echo "$(date +%s)" #to check amount of time between cmsRun and loading params.dat
+    #cmsRun ../GeneratorInterface/JewelInterface/test/testJewelDijet.py output="JewelDijet_$jobNumber" maxEvents=$nEvents  &> Jewel_${jobNumber}_numEvents${nEvents}.log
+cmsRun testJewelDijet.py output="JewelDijet_$jobNumber" maxEvents=$nEvents  &> Jewel_${jobNumber}_numEvents${nEvents}.log
     xrdcp JewelDijet_${jobNumber}_numEvent${nEvents}.root root://eosuser.cern.ch://eos/user/i/ihuntisa/
+    
 fi

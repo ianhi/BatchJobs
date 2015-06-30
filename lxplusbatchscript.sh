@@ -3,16 +3,15 @@ cd /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/CMSSW_5_3_20/src
 #cmsenv
 eval `scramv1 runtime -sh`
 
-nPyquen=1
+nPyquen=0
 nQPythia=0
 nPyquenWide=0
-nJewel=0
-nPythiaZ2=0
+nPythiaZ2=1
 nJewelDijet=0
 
 jobNum=0
 
-export nEvents=1
+export nEvents=100000
 export PythiaZ2=false
 export QPythia=false
 export Pyquen=false
@@ -80,23 +79,10 @@ do
     export jobNumber=$jobNum
 
     #    bash /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/bashScripts/submit.sh    
-    bsub -R "pool>30000" -M 300000 -q 1nd -J job_${jobNum} < /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/BatchJobs/submit.sh
+    bsub -R "pool>5000" -M 300000 -q 1nh -J job_${jobNum} < /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/BatchJobs/submit.sh
     let "i++"
     let "jobNum++"
 done
 export JewelDijet=false
-
-i=0
-while [ $i -lt $nJewel ]
-do
-    export Jewel=true
-    export jobNumber=$jobNum
-    
-    #  bash /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/bashScripts/submit.sh
-    bsub -R "pool>30000" -M 300000 -q 1nd -J job_${jobNum} < /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/BatchJobs/submit.sh
-    let "i++"
-    let "jobNum++"
-done
-export Jewel=false
 
 echo "submitted all jobs!"
