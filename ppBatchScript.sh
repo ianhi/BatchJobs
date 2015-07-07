@@ -1,8 +1,8 @@
 #!/bin/bash
-cd /afs/cern.ch/work/i/ihuntisa/CMSSW_5_3_20/src/MonteMacros/
+cd /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/CMSSW_5_3_20/src/MonteMacros/
 #cmsenv
 eval `scramv1 runtime -sh`
-cd /afs/cern.ch/work/i/ihuntisa/CMSSW_5_3_20/src/MonteMacros/
+cd /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/CMSSW_5_3_20/src/MonteMacros/
 nJobs=22
 i=0
 while [ $i -le $nJobs ];
