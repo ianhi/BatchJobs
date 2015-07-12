@@ -3,7 +3,7 @@ cd /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/multFolders/CMSSW_5_3_20/src
 #cmsenv
 eval `scramv1 runtime -sh`
 nJewelDijet=11
-export nEvents=25000
+export nEvents=75000
 jobNum=0
 
 i=0

@@ -16,7 +16,10 @@ fi
 export FIRST=$start
 export LAST=$end
 echo "First = $FIRST and last file = $LAST"
+if [ $i -eq 14 ]
+then
 bsub -R "pool>5000" -M 3000000 -q 8nh -J merge_job_${i} < /afs/cern.ch/work/i/ihuntisa/WORK/RUTGERS/BatchJobs/ppSubmit.sh
+fi
 let "i++"
 done
 echo "submit all jobs!"
